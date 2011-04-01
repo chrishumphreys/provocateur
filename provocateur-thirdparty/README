@@ -1,0 +1,18 @@
+This module contains thirdparty libraries which are packaged
+up with Provacateur. This is to allow the Java agent to have
+no external dependencies and avoiding any nasty classpath
+corruption issues which might occur if it used thirdparty jars.
+
+The source is unmodified other than package renaming.
+
+Source versions are:
+
+Lucene: lucene-3.0.3
+
+ASM: asm-3.3.1
+
+
+These modules are are distributed under their respective licenses. 
+
+See LICENSE.ASM and LICENSE.LUCENE for details.
+

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Vendor: targettest.org
+Implementation-Title: org.targettest.provocateur
+Implementation-Version: 0.1
+Specification-Vendor: targettest.org
+Created-By: 1.6.0_20 (Sun Microsystems Inc.)
+Premain-Class: org.targettest.provocateur.hook.MethodLoggerPreloader
+Specification-Title: Provocateur Weaver Classes
+Specification-Version: 0.1
+Can-Redefine-Classes: true

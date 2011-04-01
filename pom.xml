@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.targettest</groupId>
+    <artifactId>provocateur</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>provocateur-capture</module>
+        <module>provocateur-capture-test</module>
+        <module>provocateur-suite</module>
+        <module>provocateur-thirdparty</module>
+        <module>provocateur-svn</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
+        <project.build.java.target>1.6</project.build.java.target>
+        <targeter.database>/tmp/db</targeter.database>
+    </properties>
+
+
+</project>

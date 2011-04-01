@@ -1,0 +1,96 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.targettest</groupId>
+		<artifactId>provocateur</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>org.targettest</groupId>
+	<artifactId>provocateur-capture-test</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+
+	<properties>
+		<provocateur.capture>org/undertest/samples</provocateur.capture>
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.8.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.targettest</groupId>
+			<artifactId>provocateur-capture</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.hsqldb</groupId> <artifactId>hsqldb</artifactId> 
+			<version>2.0.0.rc9</version> <scope>test</scope> </dependency> -->
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.7.2</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+				<executions>
+					<execution>
+						<id>surefire-capture-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<skip>false</skip>
+							<excludes>
+								<exclude>org/undertest/verify/*</exclude>
+							</excludes>
+							<!-- argLine>-cp ${settings.localRepository}/org/targettest/provocateur-capture/1.0-SNAPSHOT/provocateur-capture-1.0-SNAPSHOT.jar -javaagent:${settings.localRepository}/org/targettest/provocateur-capture/1.0-SNAPSHOT/provocateur-capture-1.0-SNAPSHOT.jar=${provocateur.capture}</argLine -->
+							<argLine>-cp ${basedir}../provocateur-capture/target/provocateur-capture-1.0-SNAPSHOT-jar-with-dependencies.jar -javaagent:${settings.localRepository}/org/targettest/provocateur-capture/1.0-SNAPSHOT/provocateur-capture-1.0-SNAPSHOT.jar=${provocateur.capture}</argLine>
+						</configuration>
+					</execution>
+					<execution>
+						<id>surefire-verify-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<skip>false</skip>
+							<includes>
+								<include>org/undertest/verify/*</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+
+			</plugin>
+
+		</plugins>
+	</build>
+</project>

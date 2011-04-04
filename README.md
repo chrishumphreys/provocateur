@@ -19,10 +19,10 @@ projects with large, slow running, Acceptance test suites.
 
 ##License
 
-Provocateur is licensed under the Apache License v2. See LICENSE.txt
+Provocateur is licensed under the Apache License v2. See [LICENSE.txt](LICENSE.txt)
 
 Provocateur includes the excellent ASM and Lucene libraries. These are availabile under
-separate licenses. See Prvocateur/provocateur-thirdparty/README for full info.
+separate licenses. See [provocateur-thirdparty/README](provocateur-thirdparty/blob/master/provocateur-thirdparty/README) for full info.
 
 
 ##Usage
@@ -32,8 +32,6 @@ Provocateur consists of three components:
 1. A test metric capturing agent which profiles your running build to determine which tests exercise which source code.
 2. A dyanmic JUnit suite framework allowing suites to be constructed on the fly based on your modification change set
 3. A set of SCM plugins for identifying change sets. Currently only SVN is supported.
-
-See Usage.txt for more info.
 
 ##FAQ
 
@@ -53,7 +51,6 @@ A: Yes. If you have the opportunity to fix that then do so. If you don't then th
 you.
 
 
-
 Q: Can I use it within my IDE?
 
 A: Yes. Provocateur currently uses standard JUnit suite runner behaviour supported by most IDEs.
@@ -61,13 +58,13 @@ A: Yes. Provocateur currently uses standard JUnit suite runner behaviour support
 
 Q: Does it work with Maven?
 
-A: Currently the capturing of test metrics works with Maven's surefire. Creating a surefire dynamic suite
+A: Currently the capturing of test metrics works with [Maven's surefire](http://maven.apache.org/plugins/maven-surefire-plugin/). Creating a surefire dynamic suite
 is not currently supported but is planned.
 
 
 Q: Does it work with Ant?
 
-A: It should as work with Ant's Junit task but we haven't tried.
+A: It should work with Ant's Junit task but we haven't tried.
 
 
 Q: Why is it called Provocateur?

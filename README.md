@@ -30,7 +30,7 @@ separate licenses. See Prvocateur/provocateur-thirdparty/README for full info.
 Provocateur consists of three components:
 
 1. A test metric capturing agent which profiles your running build to determine which tests exercise which source code.
-2. A dyanmic JUnit suite framework allowing suites to be constructed on the fly based on your modification change set
+2. A dynamic JUnit suite framework allowing suites to be constructed on the fly based on your modification change set
 3. A set of SCM plugins for identifying change sets. Currently only SVN is supported.
 
 See Usage.txt for more info.

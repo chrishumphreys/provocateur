@@ -1,3 +1,4 @@
 target/
-provocateur.ipr
-provocateur.iws
+*.ipr
+*.iws
+*.iml

@@ -1,7 +1,7 @@
 v0.1 - 30 Mar 2011
 
-Provocateur - Targetted JUnit testing suites
---------------------------------------------
+# Provocateur - Targetted JUnit testing suites
+
 
 This is a very early version. It works for us but may not work for you.
 Help us make it better:
@@ -17,8 +17,7 @@ may wish to quickly check your local changes. This is particularly useful for
 projects with large, slow running, Acceptance test suites.
 
 
-License
--------
+##License
 
 Provocateur is licensed under the Apache License v2. See LICENSE.txt
 
@@ -26,27 +25,26 @@ Provocateur includes the excellent ASM and Lucene libraries. These are availabil
 separate licenses. See Prvocateur/provocateur-thirdparty/README for full info.
 
 
-Usage
-------
+##Usage
 
 Provocateur consists of three components:
 
-1) A test metric capturing agent which profiles your running build to determine which tests exercise which source code.
-2) A dyanmic JUnit suite framework allowing suites to be constructed on the fly based on your modificatin change set
-3) A set of SCM plugins for identifying change sets. Currently only SVN is supported.
+1. A test metric capturing agent which profiles your running build to determine which tests exercise which source code.
+2. A dyanmic JUnit suite framework allowing suites to be constructed on the fly based on your modification change set
+3. A set of SCM plugins for identifying change sets. Currently only SVN is supported.
 
 See Usage.txt for more info.
 
-FAQ
----
-
+##FAQ
 
 Q: Why should I use this?
 
-A: If you have instances of developers checking in builds without running all the tests because 
+A: If you have instances of developers checking in builds without running all the tests because
 your test suites take too long this tool could help you.
 
 
+Q: Will provocateur instrument my production classes with testing code?
+A: No. Provocateur uses a custom classloader that does all necessary instrumentation as runtime.
 
 Q: Are large slow test suites not a symptom of bad module design?
 
@@ -73,5 +71,5 @@ A: It should as work with Ant's Junit task but we haven't tried.
 
 Q: Why is it called Provocateur?
 
-A: Geek joke. The software includes a Java agent for profiling the source. We started thinking about 
+A: Geek joke. The software includes a Java agent for profiling the source. We started thinking about
 all the famous Agents and this one seemed right.

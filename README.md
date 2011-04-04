@@ -19,10 +19,10 @@ projects with large, slow running, Acceptance test suites.
 
 ##License
 
-Provocateur is licensed under the Apache License v2. See [LICENSE.txt](LICENSE.txt)
+Provocateur is licensed under the Apache License v2. See [LICENSE.txt](provocateur/raw/master/LICENSE.txt)
 
 Provocateur includes the excellent ASM and Lucene libraries. These are availabile under
-separate licenses. See [provocateur-thirdparty/README](provocateur-thirdparty/blob/master/provocateur-thirdparty/README) for full info.
+separate licenses. See [provocateur-thirdparty/README](provocateur/raw/master/provocateur-thirdparty/README) for full info.
 
 
 ##Usage

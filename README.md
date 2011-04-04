@@ -44,6 +44,7 @@ your test suites take too long this tool could help you.
 
 
 Q: Will provocateur instrument my production classes with testing code?
+
 A: No. Provocateur uses a custom classloader that does all necessary instrumentation as runtime.
 
 Q: Are large slow test suites not a symptom of bad module design?

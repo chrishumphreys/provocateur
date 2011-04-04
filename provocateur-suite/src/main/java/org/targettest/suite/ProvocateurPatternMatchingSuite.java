@@ -65,12 +65,13 @@ public class ProvocateurPatternMatchingSuite extends PatternMatchingSuite {
 					filteredRunners.add(builder.runnerForClass(clazz));
 				}
 			}
+                        int originalSize = runners.size();
 			runners.clear();
 			runners.addAll(filteredRunners);
 			if (DEBUG) {
 				System.out.println("Provocateur adjusting suite classes. From "
-						+ runners.size() + " to "
-						+ testCovereageResult.getNamedTestsToRun().size());
+						+ originalSize + " to "
+						+ runners.size());
 			}
 
 		} else {

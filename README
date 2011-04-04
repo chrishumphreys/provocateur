@@ -71,6 +71,13 @@ Q: Does it work with Ant?
 A: It should as work with Ant's Junit task but we haven't tried.
 
 
+Q: How does it work?
+
+A: During a full build a profiler indexes information about which tests 'exercise' which source files (similar
+to a code coverage tool). Subsequent Provocateur test suite runs use this information to filter out tests which 
+do not exercise modified source files. A set of rules are used to determine specific behaviour based on file type.
+
+
 Q: Why is it called Provocateur?
 
 A: Geek joke. The software includes a Java agent for profiling the source. We started thinking about 

@@ -51,11 +51,6 @@ public class MethodLoggerAdviceAdapter extends AdviceAdapter {
 	
 	@Override
 	protected void onMethodEnter() {
-//		if (isTestMethod()) {
-//			System.out.println("test method " + name);
-//		} else {
-//			System.out.println("src method");
-//		}
 		if (DEBUG) {
 			Label l0 = new Label();
 			mv.visitLabel(l0);

@@ -54,7 +54,6 @@ public class MethodLoggerClassAdapter extends ClassAdapter {
 		MethodVisitor mv = cv.visitMethod(access, name, desc, signature, exceptions);
 
 		if (!isInterface && mv != null && !name.equals("<init>")) {
-//			System.out.println("Visiting "+name);
             mv= new MethodLoggerAdviceAdapter(mv, access, name, desc, clazzName, isJunit3Class);
 		}
 		return mv;

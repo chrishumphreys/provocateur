@@ -23,9 +23,7 @@ import org.targettest.provocateur.capture.MethodLogger;
 public class MethodLoggerAdvice {
 
 	public static void onMethodEnter(String clazzName, String name, boolean testMethod) {
-//		System.out.println("***Visiting method - " + name);
 		if (testMethod) {
-//			System.out.println("Test method enter...");
 			MethodLogger.INSTANCE.handleTestEntry(clazzName, name);
 		} else {
 			if(isNotMockMethod(clazzName, name)) {
@@ -35,10 +33,7 @@ public class MethodLoggerAdvice {
 	}
 
 	public static void onMethodExit(String clazzName, String name, boolean testMethod) {
-//		System.out.println("***Visiting method - " + name);
-		
 		if (testMethod) {
-//			System.out.println("Test method exit...");
 			MethodLogger.INSTANCE.handleTestExit(clazzName, name);
 		} else {
 			if(isNotMockMethod(clazzName, name)) {

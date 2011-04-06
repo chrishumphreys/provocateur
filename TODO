@@ -1,3 +1,4 @@
 Should filter suite matches based on identified changes - not overwrite.
 Make index file configurable
-Idnex file sync with build server
+Index file sync with build server
+Write plugins for various ide's (IntelliJ in progress)

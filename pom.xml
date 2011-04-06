@@ -13,6 +13,7 @@
         <module>provocateur-suite</module>
         <module>provocateur-thirdparty</module>
         <module>provocateur-svn</module>
+        <module>provocateur-git</module>
     </modules>
 
     <properties>

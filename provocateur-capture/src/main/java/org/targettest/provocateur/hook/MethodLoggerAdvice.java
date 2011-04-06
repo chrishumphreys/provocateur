@@ -26,7 +26,7 @@ public class MethodLoggerAdvice {
 		if (testMethod) {
 			MethodLogger.INSTANCE.handleTestEntry(clazzName, name);
 		} else {
-			if(isNotMockMethod(clazzName, name)) {
+			if(isNotMockMethod(clazzName)) {
 				MethodLogger.INSTANCE.logUnderTest(clazzName, name);
 			}
 		}
@@ -36,13 +36,13 @@ public class MethodLoggerAdvice {
 		if (testMethod) {
 			MethodLogger.INSTANCE.handleTestExit(clazzName, name);
 		} else {
-			if(isNotMockMethod(clazzName, name)) {
+			if(isNotMockMethod(clazzName)) {
 				MethodLogger.INSTANCE.logUnderTest(clazzName, name);
 			}
 		}
 	}
 
-	private static boolean isNotMockMethod(String clazzName, String name) {
+	private static boolean isNotMockMethod(String clazzName) {
 		return !clazzName.contains("EnhancerByMockitoWithCGLIB");
 	}
 }

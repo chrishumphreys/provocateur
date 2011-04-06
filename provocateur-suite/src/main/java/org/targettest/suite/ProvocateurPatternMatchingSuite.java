@@ -34,131 +34,132 @@ import org.targettest.calc.scm.ModificationStrategy;
 
 public class ProvocateurPatternMatchingSuite extends PatternMatchingSuite {
 
-	private static final boolean DEBUG = true;
-	private boolean filterResults = true;
+    private static final boolean DEBUG = true;
+    private boolean filterResults = true;
 
-	public ProvocateurPatternMatchingSuite(Class<?> testClass,
-			RunnerBuilder builder) throws Throwable {
-		super(testClass, builder);
-		adjustSuiteContentsBasedOnChangeSet(testClass, builder);
-	}
+    public ProvocateurPatternMatchingSuite(Class<?> testClass,
+                                           RunnerBuilder builder) throws Throwable {
+        super(testClass, builder);
+        adjustSuiteContentsBasedOnChangeSet(testClass, builder);
+    }
 
-	private void adjustSuiteContentsBasedOnChangeSet(Class<?> testClass,
-			RunnerBuilder builder) throws Throwable {
-		initialiseHook(testClass);
-		org.targettest.calc.scm.ModificationStrategy modificationStrategy = determineModificationStrategy(testClass);
+    private void adjustSuiteContentsBasedOnChangeSet(Class<?> testClass,
+                                                     RunnerBuilder builder) throws Throwable {
+        initialiseHook(testClass);
+        org.targettest.calc.scm.ModificationStrategy modificationStrategy = determineModificationStrategy(testClass);
 
-		boolean ignorePomChanges = determineIfShouldIgnorePomChanges(testClass);
+        boolean ignorePomChanges = determineIfShouldIgnorePomChanges(testClass);
 
-		TestCoverageCalculator calc = TestCoverageCalculatorFactory
-				.createWithModificationStrategy(modificationStrategy,
-						ignorePomChanges);
+        TestCoverageCalculator calc = TestCoverageCalculatorFactory
+                .createWithModificationStrategy(modificationStrategy,
+                        ignorePomChanges);
 
-		TestCoverageResult testCovereageResult = calc
-				.getTestClassesForChanges();
-		if (!testCovereageResult.isRunAllTests()) {
+        TestCoverageResult testCovereageResult = calc
+                .getTestClassesForChanges();
+        if (!testCovereageResult.isRunAllTests()) {
 
-			List<Runner> filteredRunners = new ArrayList<Runner>();
-			for (String className : testCovereageResult.getNamedTestsToRun()) {
-				Class<?> clazz = findClassForName(convertToClassName(className));
-				if (!filterResults || isExistingMatch(clazz)) {
-					filteredRunners.add(builder.runnerForClass(clazz));
-				}
-			}
-                        int originalSize = runners.size();
-			runners.clear();
-			runners.addAll(filteredRunners);
-			if (DEBUG) {
-				System.out.println("Provocateur adjusting suite classes. From "
-						+ originalSize + " to "
-						+ runners.size());
-			}
+            List<Runner> filteredRunners = new ArrayList<Runner>();
+            for (String className : testCovereageResult.getNamedTestsToRun()) {
+                Class<?> clazz = findClassForName(convertToClassName(className));
+                if (!filterResults || isExistingMatch(clazz)) {
+                    filteredRunners.add(builder.runnerForClass(clazz));
+                }
+            }
+            int originalSize = runners.size();
+            runners.clear();
+            runners.addAll(filteredRunners);
+            if (DEBUG) {
+                System.out.println("Provocateur adjusting suite classes. From "
+                        + originalSize + " to "
+                        + runners.size());
+            }
 
-		} else {
-			if (DEBUG) {
-				System.out.println("Provcateur running existing suite...");
-			}
-		}
-	}
+        } else {
+            if (DEBUG) {
+                System.out.println("Provcateur running existing suite...");
+            }
+        }
+    }
 
-	private boolean isExistingMatch(Class<?> clazz) {
-		return matchedTestClasses.contains(clazz);
-	}
+    private boolean isExistingMatch(Class<?> clazz) {
+        return matchedTestClasses.contains(clazz);
+    }
 
-	private boolean determineIfShouldIgnorePomChanges(Class<?> testClass) {
-		UseModificationStrategy modificationStrategyAnnotation = getModificationStrategyAnnotation(testClass);
-		return modificationStrategyAnnotation.ignorePom();
-	}
+    private boolean determineIfShouldIgnorePomChanges(Class<?> testClass) {
+        UseModificationStrategy modificationStrategyAnnotation = getModificationStrategyAnnotation(testClass);
+        return modificationStrategyAnnotation.ignorePom();
+    }
 
-	private String convertToClassName(String className) {
-		return className.replaceAll("/", ".");
-	}
+    private String convertToClassName(String className) {
+        return className.replaceAll("/", ".");
+    }
 
-	private void initialiseHook(Class<?> klass) {
-		try {
-			UseInitialiser annotation = klass
-					.getAnnotation(UseInitialiser.class);
-			if (annotation != null) {
-				Class<? extends ProvocateurInitialiser> initClass = annotation
-						.value();
+    private void initialiseHook(Class<?> klass) {
+        try {
+            UseInitialiser annotation = klass
+                    .getAnnotation(UseInitialiser.class);
+            if (annotation != null) {
+                Class<? extends ProvocateurInitialiser> initClass = annotation
+                        .value();
 
-				initClass.newInstance().initialise();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+                initClass.newInstance().initialise();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	private Class<?> findClassForName(String className)
-			throws ClassNotFoundException {
-		return Thread.currentThread().getContextClassLoader()
-				.loadClass(className);
-	}
+    private Class<?> findClassForName(String className)
+            throws ClassNotFoundException {
+        return Thread.currentThread().getContextClassLoader()
+                .loadClass(className);
+    }
 
-	private org.targettest.calc.scm.ModificationStrategy determineModificationStrategy(
-			Class<?> testClass) throws Exception {
-		UseModificationStrategy modificationStrategyAnnotation = getModificationStrategyAnnotation(testClass);
-		Class<? extends org.targettest.calc.scm.ModificationStrategy> modificationStrategyClass = modificationStrategyAnnotation
-				.strategy();
-		String[] rootDirs = modificationStrategyAnnotation.dirs();
+    private org.targettest.calc.scm.ModificationStrategy determineModificationStrategy(Class<?> testClass) throws Exception {
 
-		if (modificationStrategyAnnotation.base().length() > 0) {
-			Constructor<? extends ModificationStrategy> construtor = modificationStrategyClass
-					.getConstructor(String.class, String[].class);
-			return construtor.newInstance(
-					modificationStrategyAnnotation.base(), rootDirs);
-		} else {
-			return modificationStrategyClass.newInstance();
-		}
-	}
+        UseModificationStrategy modificationStrategyAnnotation = getModificationStrategyAnnotation(testClass);
 
-	private static UseModificationStrategy getModificationStrategyAnnotation(
-			Class<?> klass) {
-		UseModificationStrategy annotation = klass
-				.getAnnotation(UseModificationStrategy.class);
-		if (annotation == null)
-			throw new RuntimeException(String.format(
-					"class '%s' must have a ModificationStrategy annotation",
-					klass.getName()));
-		return annotation;
-	}
+        Class<? extends org.targettest.calc.scm.ModificationStrategy> modificationStrategyClass = modificationStrategyAnnotation
+                .strategy();
+        String[] rootDirs = modificationStrategyAnnotation.dirs();
 
-	@Retention(RetentionPolicy.RUNTIME)
-	@Target(ElementType.TYPE)
-	public @interface UseModificationStrategy {
-		public Class<? extends org.targettest.calc.scm.ModificationStrategy> strategy();
+        if (modificationStrategyAnnotation.base().length() > 0) {
+            Constructor<? extends ModificationStrategy> construtor = modificationStrategyClass
+                    .getConstructor(String.class, String[].class);
+            return construtor.newInstance(
+                    modificationStrategyAnnotation.base(), rootDirs);
+        } else {
+            return modificationStrategyClass.newInstance();
+        }
+    }
 
-		public String base() default "";
+    private static UseModificationStrategy getModificationStrategyAnnotation(
+            Class<?> klass) {
+        UseModificationStrategy annotation = klass
+                .getAnnotation(UseModificationStrategy.class);
+        if (annotation == null)
+            throw new RuntimeException(String.format(
+                    "class '%s' must have a ModificationStrategy annotation",
+                    klass.getName()));
+        return annotation;
+    }
 
-		public String[] dirs() default { "/src/test/java",
-				"/src/test/resources", "/src/main/java", "/src/main/resources" };
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.TYPE)
+    public @interface UseModificationStrategy {
+        public Class<? extends org.targettest.calc.scm.ModificationStrategy> strategy();
 
-		public boolean ignorePom() default false;
-	}
+        public String base() default "";
 
-	@Retention(RetentionPolicy.RUNTIME)
-	@Target(ElementType.TYPE)
-	public @interface UseInitialiser {
-		public Class<? extends org.targettest.suite.ProvocateurInitialiser> value();
-	}
+        public String[] dirs() default {"/src/test/java",
+                "/src/test/resources", "/src/main/java", "/src/main/resources"};
+
+        public boolean ignorePom() default false;
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.TYPE)
+    public @interface UseInitialiser {
+        public Class<? extends org.targettest.suite.ProvocateurInitialiser> value();
+    }
 }

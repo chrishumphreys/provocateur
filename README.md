@@ -81,3 +81,7 @@ Q: Why is it called Provocateur?
 
 A: Geek joke. The software includes a Java agent for profiling the source. We started thinking about
 all the famous Agents and this one seemed right.
+
+Q: I am trying to build the project and maven is complaning it cannot find the correct jGit version.
+
+A: The jGit mvn repository does not seem to be upto date you can find the version of jGit we build against [here](https://github.com/downloads/rikf/provocateur/org.eclipse.jgit_0.12.0-SNAPSHOT.jar)

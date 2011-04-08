@@ -17,21 +17,17 @@ package org.targettest.calc.scm.git;
  * limitations under the License.
  */
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Set;
+
 import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.api.Status;
 import org.eclipse.jgit.api.errors.NoHeadException;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.RepositoryBuilder;
-import org.eclipse.jgit.revwalk.RevCommit;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Set;
 
 public class DisplayGitModifications {
-    @SuppressWarnings("rawtypes")
     public static void main(String[] args) throws IOException, NoHeadException {
 
 

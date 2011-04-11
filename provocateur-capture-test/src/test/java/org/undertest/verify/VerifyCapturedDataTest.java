@@ -31,7 +31,7 @@ public class VerifyCapturedDataTest {
 	@Test
 	public void verify() {
 		DataStore ds = DataStoreFactory.getDataStore(false);
-		Collection<String> srcNames = ds.getAllSrcMethods();
+		Collection<String> srcNames = ds.getAllProductionMethods();
 		
 		Assert.assertEquals(2, srcNames.size());
 		Assert.assertTrue(srcNames.contains("org/undertest/samples/SampleDelegate"));

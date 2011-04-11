@@ -41,7 +41,7 @@ public class SystemOutDataStore implements DataStore {
     }
 
     @Override
-    public List<String> getAllSrcMethods() {
+    public List<String> getAllProductionMethods() {
         throw new StillToImplement();
 
     }
@@ -51,7 +51,7 @@ public class SystemOutDataStore implements DataStore {
 	}
 
 	@Override
-	public List<String> getTestClassesForSrcClass(String className) {
+	public List<String> getTestClassesForProductionClass(String className) {
 		throw new StillToImplement();
 	}
 

@@ -44,7 +44,7 @@ public class ModifiedJavaSourceRule implements CalculationStrategy {
 
 	private Collection<? extends String> findTestsForFile(String file) {
 		String className = classnameHelper.convertScmFilenameToClassName(file);
-		return dataStore.getTestClassesForSrcClass(className);
+		return dataStore.getTestClassesForProductionClass(className);
 	}
 
 }

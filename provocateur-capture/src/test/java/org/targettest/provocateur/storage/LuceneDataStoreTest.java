@@ -43,7 +43,7 @@ public class LuceneDataStoreTest {
 		dataStore = getDataStore();
 		dataStore.initialise(true);
 		List<String> results = dataStore
-				.getTestClassesForSrcClass(SRC_CLASS_NAME);
+				.getTestClassesForProductionClass(SRC_CLASS_NAME);
 		Assert.assertEquals(2, results.size());
 		Assert.assertTrue(results.contains(TEST_CLASS_NAME));
 		Assert.assertTrue(results.contains(TEST_CLASS2_NAME));

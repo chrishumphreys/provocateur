@@ -22,13 +22,46 @@ import java.util.List;
 
 public interface DataStore {
 
-	boolean isClosed();
+    /**
+     * @return Has the datastore successfully shutdown
+     */
+    boolean isClosed();
+
+    /**
+     * Gracefully shutdown the datastore
+     */
 	void close();
+
+    /**
+     * Start up the datastore.
+     * @param recreate create a new index or overwrite the existing one
+     */
     void initialise(boolean recreate);
+
+    /**
+     * Insert a test invocation -> production class mapping into the datastore
+     * @param testClassName name of the test class
+     * @param testMethodName name of the test method
+     * @param className name of the "production" class
+     * @param methodName name of the "production" method
+     */
     void insertSrcMethod(String testClassName, String testMethodName, String className, String methodName);
 
+    /**
+     * @return A list of all test methods
+     */
     List<String> getAllTestMethods();
-    List<String> getAllSrcMethods();
 
-    List<String> getTestClassesForSrcClass(String className);
+    /**
+     * @return A list of all production methods
+     */
+    List<String> getAllProductionMethods();
+
+
+    /**
+     * Returns a list of all test classes that exercise the prodction class.
+     * @param className the name of the production class that we want to validate.
+     * @return all the known tests that exercise the supplied production class.
+     */
+    List<String> getTestClassesForProductionClass(String className);
 }

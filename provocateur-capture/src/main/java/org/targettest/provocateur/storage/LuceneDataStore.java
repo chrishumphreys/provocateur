@@ -116,7 +116,7 @@ public class LuceneDataStore implements DataStore {
 	}
 
 	@Override
-	public List<String> getAllSrcMethods() {
+	public List<String> getAllProductionMethods() {
 		return unique(getAllFields(SRC_CLASS_FIELD));
 	}
 
@@ -125,7 +125,7 @@ public class LuceneDataStore implements DataStore {
 	}
 
 	@Override
-	public List<String> getTestClassesForSrcClass(String className) {
+	public List<String> getTestClassesForProductionClass(String className) {
 		return query(SRC_CLASS_FIELD, className);
 	}
 

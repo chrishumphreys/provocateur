@@ -17,26 +17,21 @@ package org.targettest.calc.scm.git;
  * limitations under the License.
  */
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.Status;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.RepositoryBuilder;
 import org.targettest.calc.scm.ModificationStrategy;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 public class GitModificationStrategy implements ModificationStrategy {
     private File repositoryRootDirectoryFile;
     private Git git;
     private final String[] sourceFolders;
-
-
-
 
 
     public GitModificationStrategy(String repositoryRootDir, String[] sourceFolders)  {
@@ -61,7 +56,6 @@ public class GitModificationStrategy implements ModificationStrategy {
     }
 
 
-    @SuppressWarnings("rawtypes")
     @Override
     public List<String> identifyModifications() {
         final List<String> changedFiles = new ArrayList<String>();

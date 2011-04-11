@@ -53,7 +53,8 @@ public class GitModificationStrategyTest {
         }
     }
 
-    @Test
+    @SuppressWarnings("serial")
+	@Test
     public void testConvertsModifiedFileAbsoluteToRelativePathsAndStripsSrcFolders() throws Exception {
         String srcFolder = "/src/main/java";
         String relativeFile = "/dir/anotherFile.txt";

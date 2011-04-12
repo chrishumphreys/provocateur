@@ -21,6 +21,32 @@ package org.targettest.provocateur.capture;
 import org.targettest.provocateur.storage.DataStore;
 import org.targettest.provocateur.storage.DataStoreFactory;
 
+/**
+ * Singleton service implementing Provocateur's profiling behaviour.
+ * 
+ * The aim of this service is to create an index of which test methods
+ * 'exercise' which production code methods.
+ *   
+ * During a (full) test run with the profiler enabled Provocateur will
+ * intercept the execution of method calls.
+ * 
+ * This service will identify if the method is a test method or production 
+ * (under test) method. For production methods it will insert an entry into
+ * the index (via the DataStore) recording the method class and name and 
+ * the running test method and class.
+ * 
+ * The service is responsble for remembering which test method is currently
+ * executining for use in by all subsequent production method invocations. 
+ * It uses a ThreadLocal for this purpose. The value is set when a test method 
+ * is entered and cleared when the test method exits.
+ *    
+ * This service uses the DataStoreFactory to access the configured DataStore.
+ * Usually this is a Lucene index.
+ * 
+ * This service is invoked at runtime by some ASM byte code instrumentatioin
+ * added by MethodLoggerAdviceAdapter.
+ */
+
 public enum MethodLogger {
 	INSTANCE;
 

@@ -28,6 +28,30 @@ import org.targettest.org.objectweb.asm.ClassReader;
 import org.targettest.org.objectweb.asm.ClassVisitor;
 import org.targettest.org.objectweb.asm.ClassWriter;
 
+/**
+ * An ASM hook to apply our MethodLogger class and method adapters
+ * at runtime.
+ * 
+ * This behaviour is enabled when using the provocateur 
+ * java agent to profile the code during a full build.
+ * 
+ * (e.g. -javaagent:provocateur-capture.jar=/org/package )
+ * 
+ * The agent is passed a comma separated list of package names.
+ * Classes loaded from those packages will be instrumented. Any other
+ * classes will be loaded a normal without instrumentation.
+ * 
+ * The assumption is that this list of package names will include all
+ * your code and exclude any third-party or platform code.
+ *
+ * Instrumentation is time and space consuming so it is a good
+ * idea to exclude any packages you are not interested in.
+ * 
+ * Note the package names are actually package paths, separated
+ * by a / rather than the usual dot notation.
+ *
+ */
+
 public class MethodLoggerPreloader implements ClassFileTransformer {
 
 	private List<String> inspectPackages;

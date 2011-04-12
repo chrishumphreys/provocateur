@@ -17,6 +17,10 @@ package org.targettest.provocateur.storage;
  * limitations under the License.
  */
 
+/**
+ * A Collector used by the LuceneDataStore when collecting search
+ * results.
+ */
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +30,7 @@ import org.targettest.org.apache.lucene.index.IndexReader;
 import org.targettest.org.apache.lucene.search.Collector;
 import org.targettest.org.apache.lucene.search.Scorer;
 
-public class AllResultsCollector extends Collector {
+class AllResultsCollector extends Collector {
 
 	private List<Integer> docs = new ArrayList<Integer>();
 

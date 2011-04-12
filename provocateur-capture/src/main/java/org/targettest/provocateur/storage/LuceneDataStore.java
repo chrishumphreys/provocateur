@@ -39,8 +39,16 @@ import org.targettest.org.apache.lucene.store.Directory;
 import org.targettest.org.apache.lucene.store.FSDirectory;
 import org.targettest.org.apache.lucene.util.Version;
 
+/**
+ * An DataStore implementation which stores test/production code
+ * information in a local on-disk Lucene index.
+ *
+ * Currently this index is hardcoded to always be /tmp/testindex
+ *  
+ */
 public class LuceneDataStore implements DataStore {
 
+	private static final String INDEX_PATH = "/tmp/testindex";
 	private static final String TEST_CLASS_FIELD = "testClass";
 	private static final String SRC_CLASS_FIELD = "srcClass";
 	private static final int MAX_HITS = 1000;
@@ -66,7 +74,7 @@ public class LuceneDataStore implements DataStore {
 		try {
 			analyzer = new StandardAnalyzer(Version.LUCENE_30);
 			// Directory directory = new RAMDirectory();
-			directory = FSDirectory.open(new File("/tmp/testindex"));
+			directory = FSDirectory.open(new File(INDEX_PATH));
 			iwriter = new IndexWriter(directory, analyzer, recreate,
 					new IndexWriter.MaxFieldLength(25000));
 		} catch (Exception e) {

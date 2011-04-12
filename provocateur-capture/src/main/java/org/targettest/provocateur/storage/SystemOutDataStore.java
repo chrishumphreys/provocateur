@@ -17,6 +17,12 @@ package org.targettest.provocateur.storage;
  * limitations under the License.
  */
 
+/**
+ * A DataStore implementation which echos the test/production information
+ * to System.out.
+ * 
+ * Useful for debugging purposes.
+ */
 
 import org.targettest.provocateur.exceptions.StillToImplement;
 

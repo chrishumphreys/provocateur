@@ -17,6 +17,16 @@ package org.targettest.provocateur.storage;
  * the License.
  */
 
+/**
+ * A factory for the Singleton DataStore instance.
+ * 
+ * By default a LuceneDataStore is created which stores test/production
+ * code information in a local on-disk Lucene index.
+ * 
+ * The type of the DataStore can be controlled using the PROVBACK
+ * environment variable, e.g. by using -DPROVBACK=SystemOutDataStore
+ *  
+ */
 public class DataStoreFactory {
 
 	private static final String PROVOCATEUR_BACKEND = "PROVBACK";

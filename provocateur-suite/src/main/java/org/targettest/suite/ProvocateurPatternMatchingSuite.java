@@ -32,6 +32,41 @@ import org.targettest.calc.TestCoverageCalculatorFactory;
 import org.targettest.calc.TestCoverageResult;
 import org.targettest.calc.scm.ModificationStrategy;
 
+/**
+ * Provocateur is capable of identifying which test classes
+ * you must run to exercise any production code changes
+ * you have. In this way a dynamic test suite can be
+ * created to give you turnaround on changes.
+ * 
+ * This suite filters a master set of test classes based
+ * on whether they exercise modified production code.
+ * Any test class which, during the course of execution
+ * does not invoke a changed production class is discarded
+ * from the suite.
+ * 
+ * The master set of test classes is built using a name pattern
+ * allowing you to compose granular collections of tests
+ * (for example all unit tests, all acceptance tests etc)
+ * which are then reduced to the essential set by Provcateur. 
+ *
+ * The aim of this suite is to give the fastest possible
+ * feedback based on yur production code change set.
+ * 
+ * Before you can use this suite you must have run 
+ * the Provocateur profiler on a complete build.
+ * 
+ * To define a suite:
+ * <pre>
+ * {@code 
+ *   @UseModificationStrategy(strategy=SvnModificationStrategy.class)
+ *   @RunWith(ProvocateurPatternMatchingSuite.class)
+ *   @SuiteClassPattern(include = "classpath:/org/targettest/*Test*.class")
+ *   @SuiteClasses(value={})
+ *   public class SampleSuite { }
+ * }
+ *  </pre>	
+ */
+
 public class ProvocateurPatternMatchingSuite extends PatternMatchingSuite {
 
     private static final boolean DEBUG = true;

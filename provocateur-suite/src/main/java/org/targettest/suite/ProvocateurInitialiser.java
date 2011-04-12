@@ -18,6 +18,13 @@ package org.targettest.suite;
  * limitations under the License.
  */
 
+/**
+ * It is possible to configure an initialiser to run for a 
+ * ProvocateurPatternMatchingSuite.
+ * 
+ * This is useful in internal Provocateur testing but not
+ * normally required in normal usage.
+ */
 
 public interface ProvocateurInitialiser {
 	void initialise();

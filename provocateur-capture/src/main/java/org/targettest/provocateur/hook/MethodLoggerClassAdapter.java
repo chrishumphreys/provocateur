@@ -23,6 +23,29 @@ import org.targettest.org.objectweb.asm.ClassVisitor;
 import org.targettest.org.objectweb.asm.MethodVisitor;
 import org.targettest.org.objectweb.asm.Opcodes;
 
+/**
+ * An ASM class adapter, used for instrumenting the Java
+ * class bytecode at runtime.
+ * 
+ * This adapter is invoked by the ASM runtime every time a
+ * Java class is loaded from the classpath.
+ * 
+ * This behaviour is enabled by the MethodLoggerPreloader when
+ * using the provocateur java agent to profile the code
+ * during a full build.
+ * 
+ * (e.g. -javaagent:provocateur-capture.jar=/org/package )
+ * 
+ * The primary function of this adapter is to apply the 
+ * MethodLoggerAdviceAdapter around each class method.
+ * 
+ * As JUnit3 tests are determined by their class information
+ * (they must extend a certain super class) this is checked 
+ * here and the result is passed into the MethodLoggerPreloader
+ * which may use it when determining if a method is production
+ * or test code.
+ * 
+ */
 
 public class MethodLoggerClassAdapter extends ClassAdapter {
 

@@ -35,6 +35,16 @@ import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.Suite;
 import org.junit.runners.model.RunnerBuilder;
 
+/**
+ * A Suite which collects Test classes to run based on
+ * class name. 
+ * 
+ * This is not Provcateur specific and useful when you need
+ * to create separate Unit/Integration/Acceptance test suites
+ * based on package or class names.
+ *
+ */
+
 public class PatternMatchingSuite  extends Suite {
 
     private static Class<?>[] getClassesFromAnnotation(Class<?> klass) {

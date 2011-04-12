@@ -20,6 +20,18 @@ package org.targettest.provocateur.hook;
 
 import org.targettest.provocateur.capture.MethodLogger;
 
+/**
+ * The ASM hook 'Advice' called when any test or production 
+ * method is entered or exited. This is called as the method 
+ * is actually executed.
+ *
+ * This Advice delegates most of its behaviour to the MethodLogger
+ * singleton.
+ * 
+ * This class forms an anti-corruption boundary between the 
+ * ASM mechanics of runtime hooking and the profiling logic.
+ */
+
 public class MethodLoggerAdvice {
 
 	public static void onMethodEnter(String clazzName, String name, boolean testMethod) {

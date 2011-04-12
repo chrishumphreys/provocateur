@@ -19,6 +19,27 @@ package org.targettest.calc.scm;
 
 import java.util.List;
 
+/**
+ * A ProvocateurPatternMatchingSuite uses an SCM strategy
+ * to determine the production code change set. This set
+ * of files is then used by Provocateur to filter the 
+ * suite contents.
+ * 
+ * Different strategies are available for different
+ * source control systems.
+ * 
+ * It is not normal to use this directly in your
+ * client code, instead configure one of the available
+ * concrete implementations for your ProvocateurPatternMatchingSuite
+ * using the @UseModificationStrategy annotation.
+ * For example:
+ * <pre>
+ * {@code 
+ *   @UseModificationStrategy(strategy=SvnModificationStrategy.class)
+ * }
+ * </pre>
+ */
+
 public interface ModificationStrategy {
 
 	List<String> identifyModifications();

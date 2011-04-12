@@ -28,7 +28,12 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-public final class PatternMatchingClassCollector {
+/**
+ * A helper class used internal to Provocateur when collecting
+ * test classes by name for use in a PatternMatchingSuite run.
+ */
+
+final class PatternMatchingClassCollector {
     private static final MetadataReaderFactory metadataReaderFactory = new CachingMetadataReaderFactory();
 
     public static Set<Class<?>> getClassesFromPattern(String pattern) {

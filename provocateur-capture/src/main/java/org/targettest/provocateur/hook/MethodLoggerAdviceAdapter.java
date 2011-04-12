@@ -23,6 +23,30 @@ import org.targettest.org.objectweb.asm.Label;
 import org.targettest.org.objectweb.asm.MethodVisitor;
 import org.targettest.org.objectweb.asm.commons.AdviceAdapter;
 
+/**
+ * An ASM Method adapter used to inject our profiling instrumentation
+ * into a Java class at runtime.
+ * 
+ * Note the bytecode of the class is modified to include calls to our
+ * MethodLogger 'Aspect' but this code is not actually executed until
+ * the instrumented Java class is used.
+ * 
+ * The purpose of this ASM Method adapter is to inject hooks for 
+ * every method enter and exit within every Java class under
+ * inspection.
+ * 
+ * These hooks delegate onto the MethodLoggerAdvice class to perform
+ * the actual work. The profiling code must determine if a method is
+ * a test method or production code. It does this by checking if the
+ * method is within a JUnit3 class or if the method has been 
+ * annotated by a JUnit4 @Test annotation. This determination
+ * is passed to the MethodLoggerAdvice so it can process the method
+ * correctly. 
+ * 
+ * Note the bytecode to inject can be calculated using the 
+ * org.undertest.tools.ClassDumper tool.
+ */
+
 public class MethodLoggerAdviceAdapter extends AdviceAdapter {
 
 	private final String name;

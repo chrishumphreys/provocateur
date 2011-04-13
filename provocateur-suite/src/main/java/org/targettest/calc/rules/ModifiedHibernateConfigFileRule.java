@@ -17,6 +17,16 @@ package org.targettest.calc.rules;
  * limitations under the License.
  */
 
+/**
+ * A rule which recognises if the modified file is a Hibernate
+ * configuration file. If it is this rule votes to run all
+ * Test classes available.
+ * 
+ * This behaviour is desirable as it is difficult to predict
+ * the effect of changing a Hibernate file, often it can cause
+ * test failure in unexpected areas. When in doubt Provocateur
+ * will run all tests.
+ */
 public class ModifiedHibernateConfigFileRule extends RunAllRule {
 
 	protected boolean isMatchFile(String file) {

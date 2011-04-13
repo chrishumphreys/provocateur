@@ -23,6 +23,19 @@ import java.util.List;
 
 import org.targettest.provocateur.storage.DataStore;
 
+/**
+ * A rule which matches a modified Java production source file.
+ * This rule uses Provocateur's DataStore to identify all Tests
+ * which 'exercise' this production class.
+ * 
+ * All Tests found to 'exercise' this class are added to the list
+ * of Test cases to run.
+ * 
+ * This rule uses Provocateur's DataStore to calculate tests. This
+ * store must have previously been created by running Provocateur's
+ * capture profiler. See MethodLoggerPreloader.
+ *
+ */
 public class ModifiedJavaSourceRule implements CalculationStrategy {
 
 	private DataStore dataStore;

@@ -21,6 +21,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * A rule which detects if the modified file is a Test class.
+ * If it is this rule votes to run that Test class.
+ */
 
 public class ModifiedTestRule implements CalculationStrategy {
 	private ClassnameHelper classnameHelper;

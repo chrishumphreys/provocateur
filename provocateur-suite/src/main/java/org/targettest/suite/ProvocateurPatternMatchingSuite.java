@@ -65,6 +65,11 @@ import org.targettest.calc.scm.ModificationStrategy;
  *   public class SampleSuite { }
  * }
  *  </pre>	
+ *  
+ *  Note when experimenting with Provocateur on your project you may wish 
+ *  to disabled the POM rule from forcing a complete test run if you have 
+ *  a modified POM file. To do this pass ignorePom=true to @UseModificationStrategy 
+ *  This is not recommended for normal usage.
  */
 
 public class ProvocateurPatternMatchingSuite extends PatternMatchingSuite {

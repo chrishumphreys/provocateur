@@ -21,6 +21,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Value object class for representing the result of a call
+ * to TestCoverageCalculator.getTestClassesForChanges()
+ * 
+ */
 public class TestCoverageResult {
 
 	private final boolean runAllTests;

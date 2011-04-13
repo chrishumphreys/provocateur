@@ -20,6 +20,17 @@ package org.targettest.calc.rules;
 import java.util.List;
 
 
+/**
+ * An abstract super class for those strategies which force
+ * Provcateur to run all available tests in the master suite.
+ * 
+ * For example the ModifiedSpringConfigRule will instruct 
+ * Provocateur to give up attempting to determine the set of Test
+ * classes and run all tests. This is sensible as modifying
+ * spring configuration can have a big (and indeterminable) 
+ * effect on your code.
+ *
+ */
 public abstract class RunAllRule implements CalculationStrategy {
 
 	@Override

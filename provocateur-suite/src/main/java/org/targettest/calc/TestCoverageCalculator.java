@@ -26,6 +26,36 @@ import org.targettest.calc.rules.CalculationResult;
 import org.targettest.calc.rules.CalculationStrategy;
 import org.targettest.calc.scm.ModificationStrategy;
 
+/**
+ * Provcateur support the creation of dynamic test suites based on
+ * a change set. See ProvocateurPatternMatchingSuite. 
+ * 
+ * Internally Provocateur uses TestCoverageCalculator to calculate the
+ * list of Test classes for a set of changed production code. It does this
+ * by using a ModificationStrategy (e.g. SvnModificationtrategy) to determine
+ * the list of changes and applies a series of rules to the change set.
+ * 
+ * The rules indicate how to deal with a certain changed file. For example
+ * if the changed file is a Test then that test is included in the list to
+ * run.
+ * 
+ * If the changed file is a production Java class, Provocateur queries its
+ * DataStore to determine all Test classes which 'exercise' that class. All
+ * matches are added to the list of tests to run.
+ * 
+ * There are a few other rules which are documented in the rules package.
+ *  
+ * The rules are executed in a priority order, an early rule can instruct 
+ * Provocateur to run all tests available. In this case later rules need
+ * not be executed. Typically though each rule is executed and their output
+ * is aggregated into a single list of Test classes to run.
+ *  
+ *  
+ * As an end user it is unusual to use TestCoverageCalculator directly. See
+ * ProvocateurPatternMatchingSuite instead.
+ *
+ */
+
 public class TestCoverageCalculator {
 
 	private final ModificationStrategy modificationStrategy;

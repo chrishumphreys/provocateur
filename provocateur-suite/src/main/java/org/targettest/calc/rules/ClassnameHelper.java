@@ -17,6 +17,11 @@ package org.targettest.calc.rules;
  * limitations under the License.
  */
 
+/**
+ * A helper class uesed by other rules.
+ * 
+ * Not designed for end user use.
+ */
 public class ClassnameHelper {
 
 	public String convertScmFilenameToClassName(String file) {

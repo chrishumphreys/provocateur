@@ -19,6 +19,14 @@ package org.targettest.calc.rules;
 
 import java.util.List;
 
+/**
+ * Provcateur is responsible for identifying a set of Test classes
+ * to run for a list of modified files. It does this using a set
+ * of strategy objects or rules.   
+ *
+ * This interface represents the contract for all of Provocateur's
+ * strategies.
+ */
 public interface CalculationStrategy {
 
 	CalculationResult calculate(List<String> modified);

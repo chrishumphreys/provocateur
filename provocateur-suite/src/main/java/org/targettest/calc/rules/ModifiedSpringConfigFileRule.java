@@ -17,11 +17,22 @@ package org.targettest.calc.rules;
  * limitations under the License.
  */
 
+/**
+ * A rule which recognises if the modified file is a Spring
+ * configuration file. If it is this rule votes to run all
+ * Test classes available.
+ * 
+ * This behaviour is desirable as it is difficult to predict
+ * the effect of changing a Spring file, often it can cause
+ * test failure in unexpected areas. When in doubt Provocateur
+ * will run all tests.
+ */
+
 public class ModifiedSpringConfigFileRule extends RunAllRule {
 
 	protected boolean isMatchFile(String file) {
 		// TODO Write a better matcher
-		return file.endsWith(".xml");
+		return file.endsWith(".xml") && !file.endsWith("pom.xml");
 	}
 
 }

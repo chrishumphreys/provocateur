@@ -22,6 +22,14 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * A value object used to represent the result of a 
+ * CalculationStrategy.
+ * 
+ * It can include a list of Test classes to run or an
+ * instruction indicating all available tests should be 
+ * run.
+ */
 public class CalculationResult {
 
 	private final boolean runAllTests;

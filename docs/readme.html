@@ -1,0 +1,175 @@
+<html>
+
+<head>
+<title>Provocateur - Usage</title>
+<style type="text/css">
+h1 {font-size:1.4em;border-style: solid; border-width:0px;border-bottom-width:1px;margin-top:40px;margin-bottom:40px;}
+h2 {font-size:1.2em;margin-top:40px;margin-bottom:40px;}
+h3 {font-size:1.1em;margin-top:40px;margin-bottm:40px;}
+body {font-size:1em; font-family:Arial,Helvatica,sans-serif;}
+pre {border-style: solid; border-width:1px; margin:10px; padding:10px;background-color: #FFFFD9;border: 1px solid #EDEDDF;}
+.code {font-family: Courier New,Courier,Fixed; font-size: 0.8em; background-color: #FFFFD9;border: 1px solid #EDEDDF;}
+p {margin:10px;}
+ol {margin-left:10px;}
+</style>
+</head>
+
+<body>
+
+<h1>Provocateur - Introduction</h1>
+
+<p>
+Provocateur is a tool to identify which JUnit tests you must run in order to test
+modified source files. This allows the developer to create dynamic test suites
+optimised to test only the local change set.
+</p>
+
+<p>
+This is not a replacement for running a full build but in some circumstances you 
+may wish to quickly check your local changes. This is particularly useful for
+projects with large, slow running, Acceptance test suites.
+</p>
+
+<p>
+Provocateur consists of three components:
+
+<ol>
+<li>A test metric capturing agent which profiles your running build to determine which tests exercise which source code.</li>
+<li>A dynamic JUnit suite framework allowing suites to be constructed on the fly based on your modification change set</li>
+<li>A set of SCM plugins for identifying change sets.</li>
+</ol>
+</p>
+
+
+
+<h1>Usage</h1>
+
+<ul>
+<li><a href="#maveninstructions">For Maven projects</a></li>
+<li>More to follow...</li>
+</ul>
+
+<a name="#maveninstructions"/>
+<h2>Instructions for Maven projects</h2>
+
+<p>
+This example assumes SVN but the same applies if using Git.
+<p>
+
+
+<ol>
+<li><a href="#mavenstep1">Enable Provocateur profiling during full build</a></li>
+<li><a href="#mavenstep2">Profiling your tests</a></li>
+<li><a href="#mavenstep3">Create a Provcateur test suite</a></li>
+<li><a href="#mavenstep4">Run the suite</a></li>
+</ol>
+
+<a name="mavenstep1"/>
+<h3>Enable Provocateur profiling during full build</h3>
+
+<p>
+Add a <span class="code">&lt;configuration&gt;&lt;argLine&gt;...&lt;/argLine&gt;&lt;/configuration&gt;</span> to your 
+surefire plugin to instruct Surefire to enable the Provocateur agent.
+
+You will need to add:
+</p>
+
+<pre>
+-cp /pathto/provocateur-capture-1.0-SNAPSHOT-jar-with-dependencies.jar
+-javaagent:/pathto/provocateur-capture-1.0-SNAPSHOT.jar=/com/yourpackages
+</pre>
+
+<p>
+Update <span class="code">/pathto/</span> to the full path to the required jar.
+</p>
+<p>
+Update <span class="code">/com/yourpackages</span> to be the root package of all classes you wish to 
+profile. Typically this should include anything in your project but exclude
+thirdparty packages. You can add a comma separated list of packages. Your
+packages must be separated by '/' rather than the more normal '.'
+</p>
+<p>
+e.g.
+</p>
+
+<pre>
+&lt;argLine&gt;-cp /pathto/provocateur-capture-1.0-SNAPSHOT-jar-with-dependencies.jar 
+         -javaagent:/pathto/provocateur-capture-1.0-SNAPSHOT.jar=/com/yourpackages&lt;/argLine&gt;
+</pre>
+
+<a name="mavenstep2"/>
+<h3>Profiling your tests</h3>
+
+<p>
+
+Run a Maven build (with tests) to profile your code.
+
+</p>
+
+<a name="mavenstep3"/>
+<h3>Create a Provcateur test suite</h3>
+
+
+<p>
+Create a class MyDynamicTestSuite in your test package configured to 
+include all your Test classes you wish to run (the master set).
+</p>
+
+<pre>
+
+package com.yourcompany.mytests;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.targettest.suite.ProvocateurPatternMatchingSuite;
+
+@Suite.SuiteClasses({})
+@RunWith(ProvocateurPatternMatchingSuite.class)
+@ProvocateurPatternMatchingSuite.SuiteClassPattern(include = "classpath:/com/yourcompany/**/*Test.class", 
+     exclude = DontRunMeTest.class)
+@ProvocateurPatternMatchingSuite.UseModificationStrategy(SvnModificationStrategy.class, 
+     base="/pathto/svnroot", ignorePom=true)
+public class MyDynamicTestSuite {
+}
+
+</pre>
+
+<p>
+Update your package names accordingly. 
+</p>
+<p>
+Ensure you set the <span class="code">@SuiteClassPattern(include="")</span> attribute to include
+all the tests (using name patterns) that you wish in yur master set.
+You can use a comma separated list of expressions.
+</p>
+<p>
+You may also wish to specify <span class="code">exclude=""</span> patterns.
+</p>
+<p>
+Ensure you have configured your SCM root directory correctly using the <span class="code">base=""</span>
+attribute in <span class="code">@ProvocateurPatternMatchingSuite.UseModificationStrategy </span> annotation.
+</p>
+<p>
+For experimental purposes you should add the <span class="code">ignorePom=true</span> attribute. This is
+important whilst you still have a local modified pom.xml file due to step1. Once 
+you are ready to check your changes into SVN you should remove the ignorePom=true
+attribute. 
+</p>
+<p>
+Substitute <span class="code">GitModificationStrategy.class</span> for <span class="code">SvnModificationStrategy.class</span> if you wish.
+</p>
+
+<a name="mavenstep4"/>
+<h3>Run the suite</h3>
+
+<p>
+
+Run the suite within your IDE usng your normal JUnit runner.
+
+Experiment with touching local test and production code to verify Provocateur
+filters your master set correctly.
+
+</p>
+
+</body>
+</html>

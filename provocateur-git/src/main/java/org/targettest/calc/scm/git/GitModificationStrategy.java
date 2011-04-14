@@ -28,6 +28,27 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.RepositoryBuilder;
 import org.targettest.calc.scm.ModificationStrategy;
 
+/**
+ * A ModificationStrategy identifies changed files based on Git status.
+ * 
+ * To use with a ProvocateurPatternMatchingSuite add the annotation
+ * @UseModificationStrategy(strategy=GitModificationStrategy.class, base="/path/to/gitroot")
+ * 
+ * This strategy requires the local Git root folder to be specified.
+ * 
+ * Changes are identified relative to the the Git root. Git will 
+ * determine changed filepaths relative the the root directory folder.
+ * 
+ * Provocateur requires filepaths to be converted to classnames.
+ * This conversion requires leading source project/folder names to be stripped
+ * leaving a filepath which can be converted to a fully qualified classname.
+ *  
+ * To achieve this the strategy will look for common source folder sub-paths. 
+ * A set suitable for Maven style projects is used by default. You can 
+ * change this by adding the dir={"somedir","somedir"...} attribute 
+ * to the @UseModificationStrategy annotation.  
+ */
+
 public class GitModificationStrategy implements ModificationStrategy {
     private File repositoryRootDirectoryFile;
     private Git git;

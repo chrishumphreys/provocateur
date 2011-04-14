@@ -30,6 +30,27 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A ModificationStrategy identifies changed files based on Subversion status.
+ * 
+ * To use with a ProvocateurPatternMatchingSuite add the annotation
+ * @UseModificationStrategy(strategy=SvnModificationStrategy.class, base="/path/to/svnroot")
+ * 
+ * This strategy requires the local SVN root folder to be specified.
+ * 
+ * Changes are identified relative to the the SVN root. SVN will 
+ * determine changed filepaths relative the the root directory folder.
+ * 
+ * Provocateur requires filepaths to be converted to classnames.
+ * This conversion requires leading source project/folder names to be stripped
+ * leaving a filepath which can be converted to a fully qualified classname.
+ *  
+ * To achieve this the strategy will look for common source folder sub-paths. 
+ * A set suitable for Maven style projects is used by default. You can 
+ * change this by adding the dir={"somedir","somedir"...} attribute 
+ * to the @UseModificationStrategy annotation.  
+ */
+
 public class SvnModificationStrategy implements ModificationStrategy {
     private File repositoryRootDirectoryFile;
     private final SVNClientManager clientManager;

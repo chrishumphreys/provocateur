@@ -1,5 +1,7 @@
 v0.1 - 30 Mar 2011
 
+##This is a work in progress and is in need of some heavy refactoring
+
 # Provocateur - Targetted JUnit testing suites
 
 
